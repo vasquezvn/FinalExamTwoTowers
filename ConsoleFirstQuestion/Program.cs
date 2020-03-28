@@ -18,6 +18,19 @@ namespace ConsoleFirstQuestion
             var isPrime = p.IsTherePrimeNumbers(result);
         }
 
+        /// <summary>
+        /// PSEUDOCODE:
+        /// Set tracker to get first value from array
+        /// Create a new list to add missing numbers in array
+        /// iterate over array
+        ///     if tracker is different than value get from array, means that's missing number
+        ///         add missing number to array
+        ///         tracker get value from array in correct position
+        ///     tracker increment it's value in one
+        /// 
+        /// </summary>
+        /// <param name="numbers">Array to verify missing numbers IT SHOULD BE SORTED</param>
+        /// <returns>Array with missing numbers in array from parameter</returns>
         public int[] GetMissingNumbers(int[] numbers)
         {
             var tracker = numbers[0];
@@ -37,6 +50,17 @@ namespace ConsoleFirstQuestion
             return missingNumb.ToArray();
         }
 
+        /// <summary>
+        /// PSEUDOCODE:
+        /// Define a value as false to check if there is a prime number in array
+        /// iterate over array from parameter
+        ///     check if number is prime
+        ///         update boolean value to true
+        ///         get out from iterator
+        /// 
+        /// </summary>
+        /// <param name="numbers">Set of numbers to check</param>
+        /// <returns>True if there is a primer number in array</returns>
         public bool IsTherePrimeNumbers(int[] numbers)
         {
             var result = false;
@@ -53,6 +77,18 @@ namespace ConsoleFirstQuestion
             return result;
         }
 
+        /// <summary>
+        /// PSEUDOCODE:
+        /// return false if number is exactly to one
+        /// return true if number is exactly two
+        /// Get square root number and round it to minimun value if there is decimals for it to determine limit for iterator
+        /// iterate over possible values that could be set as primes
+        ///     if number is module from number iterator then return false
+        /// if iteration ends and module has not been found for number, it will return true
+        /// 
+        /// </summary>
+        /// <param name="number">Number to check if it's prime</param>
+        /// <returns>True if there isn'tnot found a module number in iterator</returns>
         private bool isPrime(int number)
         {
 
