@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTheTeaStory", "Conso
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleFirstQuestion", "ConsoleFirstQuestion\ConsoleFirstQuestion.csproj", "{B1E8482C-4F15-4FDA-AB7C-65340D7BEE01}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleSecondQuestion", "ConsoleSecondQuestion\ConsoleSecondQuestion.csproj", "{06398527-A54A-4600-A606-CA671BE82317}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{B1E8482C-4F15-4FDA-AB7C-65340D7BEE01}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1E8482C-4F15-4FDA-AB7C-65340D7BEE01}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1E8482C-4F15-4FDA-AB7C-65340D7BEE01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06398527-A54A-4600-A606-CA671BE82317}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06398527-A54A-4600-A606-CA671BE82317}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06398527-A54A-4600-A606-CA671BE82317}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06398527-A54A-4600-A606-CA671BE82317}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

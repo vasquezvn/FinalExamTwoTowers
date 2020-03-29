@@ -2,6 +2,8 @@
 using ConsoleTheTeaStory.Pages;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ConsoleFirstQuestion;
+using ConsoleSecondQuestion;
+using System.Threading.Tasks;
 
 namespace FinalExamTwoTowers
 {
@@ -33,7 +35,7 @@ namespace FinalExamTwoTowers
         [TestMethod]
         public void VerifyPrimeNumberExists()
         {
-            ConsoleFirstQuestion.Program p = new Program();
+            ConsoleFirstQuestion.Program p = new ConsoleFirstQuestion.Program();
 
             int[] array1 = new int[] { 1, 2, 3, 4 };
             int[] array2 = new int[] { 4, 5, 7, 8, 10 };
@@ -43,6 +45,24 @@ namespace FinalExamTwoTowers
             var isTherePrimeNumb = p.IsTherePrimeNumbers(missingNumbs);
 
             Assert.IsTrue(isTherePrimeNumb, "There isn't prime numbers");
+        }
+
+        [TestMethod]
+        public async Task VerifyFirstStudentAsync()
+        {
+            ConsoleSecondQuestion.Program p = new ConsoleSecondQuestion.Program();
+            Student s = new Student();
+            s.id = 1;
+            s.firstName = "Vernon";
+            s.lastName = "Harper";
+            s.email = "egestas.rhoncus.Proin@massaQuisqueporttitor.org";
+            s.programme = "Financial Analysis";
+            s.courses = new string[] { "Accounting", "Statistics" };
+
+            await p.IsFirstStudentAsync(s);
+
+            var isFirstStudent = p.GetStudentApi().Equals(s);
+            Assert.IsTrue(isFirstStudent, "Student is not the first student on API");
         }
 
         [TestCleanup]

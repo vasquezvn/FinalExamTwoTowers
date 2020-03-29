@@ -60,6 +60,10 @@
       <Project>{b1e8482c-4f15-4fda-ab7c-65340d7bee01}</Project>
       <Name>ConsoleFirstQuestion</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ConsoleSecondQuestion\ConsoleSecondQuestion.csproj">
+      <Project>{06398527-a54a-4600-a606-ca671be82317}</Project>
+      <Name>ConsoleSecondQuestion</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ConsoleTheTeaStory\ConsoleTheTeaStory.csproj">
       <Project>{321fde55-d0d3-4ac2-a862-d86878e1039d}</Project>
       <Name>ConsoleTheTeaStory</Name>
