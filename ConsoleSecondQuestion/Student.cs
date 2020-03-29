@@ -21,8 +21,7 @@
                 return false;
             }
 
-            return (this.id == ((Student)obj).id)
-                && (this.firstName == ((Student)obj).firstName)
+            return (this.firstName == ((Student)obj).firstName)
                 && (this.lastName == ((Student)obj).lastName)
                 && (this.email == ((Student)obj).email)
                 && (this.programme == ((Student)obj).programme);
@@ -35,6 +34,11 @@
                 ^ lastName.GetHashCode()
                 ^ email.GetHashCode()
                 ^ programme.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return $"Id: {id} \n FirstName: {firstName} \n LastName: {lastName} \n Email: {email} \n Programme: {programme} \n Courses: {courses.ToString()}";
         }
     }
 }

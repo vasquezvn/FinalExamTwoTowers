@@ -65,6 +65,25 @@ namespace FinalExamTwoTowers
             Assert.IsTrue(isFirstStudent, "Student is not the first student on API");
         }
 
+        [TestMethod]
+        public async Task VerifyCreateStudentAsync()
+        {
+            ConsoleSecondQuestion.Program p = new ConsoleSecondQuestion.Program();
+            Student s = new Student();
+            s.firstName = Helper.RandomString(5);
+            s.lastName = Helper.RandomString(5);
+            s.email = $"{Helper.RandomString(5)}@test.org";
+            s.programme = Helper.RandomString(5);
+            s.courses = new string[] { Helper.RandomString(5), Helper.RandomString(5) };
+
+            await p.CreateStudentAsync(s);
+            await p.GetStudentByName(s.firstName);
+
+            var isCreated = p.GetStudentApi().Equals(s);
+
+            Assert.IsTrue(isCreated, "User Was not created on API");
+        }
+
         [TestCleanup]
         public void Cleanup()
         {
