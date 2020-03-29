@@ -1,7 +1,6 @@
 ﻿using ConsoleTheTeaStory;
 using ConsoleTheTeaStory.Pages;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ConsoleFirstQuestion;
 using ConsoleSecondQuestion;
 using System.Threading.Tasks;
 
@@ -55,7 +54,7 @@ namespace FinalExamTwoTowers
             s.id = 1;
             s.firstName = "Vernon";
             s.lastName = "Harper";
-            s.email = "egestas.rhoncus.Proin@massaQuisqueporttitor.org";
+            s.email = "IKFVY@test.com";
             s.programme = "Financial Analysis";
             s.courses = new string[] { "Accounting", "Statistics" };
 
@@ -82,6 +81,25 @@ namespace FinalExamTwoTowers
             var isCreated = p.GetStudentApi().Equals(s);
 
             Assert.IsTrue(isCreated, "User Was not created on API");
+        }
+
+        [TestMethod]
+        public async Task VerifyUpdateStudentEmailAsync()
+        {
+            ConsoleSecondQuestion.Program p = new ConsoleSecondQuestion.Program();
+            
+            await p.GetStudentAsync(1);
+            var studentEmail = p.GetStudentApi().email;
+
+            p.GetStudentApi().email = $"{Helper.RandomString(5)}@test.com";
+            await p.UpdateStudentAsync(p.GetStudentApi());
+
+            await p.GetStudentAsync(1);
+            var studentEmailUpdated = p.GetStudentApi().email;
+
+            var isUpdated = !studentEmail.Equals(studentEmailUpdated);
+
+            Assert.IsTrue(isUpdated, "Email was not been updated to selected Student");
         }
 
         [TestCleanup]

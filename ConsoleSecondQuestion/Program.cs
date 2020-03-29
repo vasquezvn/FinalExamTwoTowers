@@ -39,6 +39,12 @@ namespace ConsoleSecondQuestion
             Console.WriteLine(p.studentApi);
 
             Console.WriteLine($"is Equal: {s.Equals(p.studentApi)}");
+            
+            await p.GetStudentAsync(1);
+
+            p.GetStudentApi().email = "updated_@test.com";
+
+            await p.UpdateStudentAsync(p.GetStudentApi());
         }
 
         public Student GetStudentApi() { return studentApi; }
@@ -100,6 +106,34 @@ namespace ConsoleSecondQuestion
 
             // return URI of the created resource.
             return response.Headers.Location;
+        }
+
+        public async Task<string> UpdateStudentAsync(Student student)
+        {
+            var studentJson = JsonConvert.SerializeObject(student);
+            var buffer = System.Text.Encoding.UTF8.GetBytes(studentJson);
+            var byteContent = new ByteArrayContent(buffer);
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            HttpResponseMessage response = await client.PutAsync($"http://localhost:8080/student/{student.id}", byteContent);
+            response.EnsureSuccessStatusCode();
+
+            // Deserialize the updated product from the response body.
+            var studentString = await response.Content.ReadAsStringAsync();
+            return studentString;
+        }
+
+        public async Task<Student> GetStudentAsync(int studentId)
+        {
+            var jsonString = await client.GetStringAsync($"http://localhost:8080/student/{studentId}");
+            var studentJson = JsonConvert.DeserializeObject<Student>(jsonString);
+
+            if (studentJson != null)
+            {
+                studentApi = studentJson;
+            }
+
+            return studentJson;
         }
     }
 }
