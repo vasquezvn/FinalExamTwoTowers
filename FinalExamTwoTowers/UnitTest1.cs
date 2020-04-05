@@ -47,7 +47,7 @@ namespace FinalExamTwoTowers
         }
 
         [TestMethod]
-        public async Task VerifyFirstStudentAsync()
+        public void VerifyFirstStudentAsync()
         {
             ConsoleSecondQuestion.Program p = new ConsoleSecondQuestion.Program();
             Student s = new Student();
@@ -58,14 +58,13 @@ namespace FinalExamTwoTowers
             s.programme = "Financial Analysis";
             s.courses = new string[] { "Accounting", "Statistics" };
 
-            await p.IsFirstStudentAsync(s);
+            var isFirst = p.IsFirstStudent(s).Result;
 
-            var isFirstStudent = p.GetStudentApi().Equals(s);
-            Assert.IsTrue(isFirstStudent, "Student is not the first student on API");
+            Assert.IsTrue(isFirst, "Student is not the first student on API");
         }
 
         [TestMethod]
-        public async Task VerifyCreateStudentAsync()
+        public void VerifyCreateStudentAsync()
         {
             ConsoleSecondQuestion.Program p = new ConsoleSecondQuestion.Program();
             Student s = new Student();
@@ -75,29 +74,30 @@ namespace FinalExamTwoTowers
             s.programme = Helper.RandomString(5);
             s.courses = new string[] { Helper.RandomString(5), Helper.RandomString(5) };
 
-            await p.CreateStudentAsync(s);
-            await p.GetStudentByName(s.firstName);
+            var isStudentCreated = p.CreateStudentAsync(s).Result;
+            var studentFromApi = p.GetStudentByName(s.firstName).Result;
 
-            var isCreated = p.GetStudentApi().Equals(s);
+            var isCreated = studentFromApi.Equals(s) && isStudentCreated;
 
             Assert.IsTrue(isCreated, "User Was not created on API");
         }
 
         [TestMethod]
-        public async Task VerifyUpdateStudentEmailAsync()
+        public void VerifyUpdateStudentEmailAsync()
         {
             ConsoleSecondQuestion.Program p = new ConsoleSecondQuestion.Program();
-            
-            await p.GetStudentAsync(1);
-            var studentEmail = p.GetStudentApi().email;
+            var idStudentToUpdate = 1;
 
-            p.GetStudentApi().email = $"{Helper.RandomString(5)}@test.com";
-            await p.UpdateStudentAsync(p.GetStudentApi());
+            var studentFromApi = p.GetStudentAsync(idStudentToUpdate).Result;
+            var emailPreUpdate = studentFromApi.email;
 
-            await p.GetStudentAsync(1);
-            var studentEmailUpdated = p.GetStudentApi().email;
 
-            var isUpdated = !studentEmail.Equals(studentEmailUpdated);
+            studentFromApi.email = $"{Helper.RandomString(20)}@test.com";
+            var isStudentUpdated = p.UpdateStudentAsync(studentFromApi).Result;
+
+            var studentPostUpdate = p.GetStudentAsync(idStudentToUpdate).Result;
+
+            var isUpdated = !studentPostUpdate.email.Equals(emailPreUpdate) && isStudentUpdated;
 
             Assert.IsTrue(isUpdated, "Email was not been updated to selected Student");
         }
