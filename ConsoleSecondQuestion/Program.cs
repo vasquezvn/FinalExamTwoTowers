@@ -10,7 +10,6 @@ namespace ConsoleSecondQuestion
     public class Program
     {
         private HttpClient client = new HttpClient();
-        private Student studentApi = new Student();
 
         public Program()
         {
@@ -47,7 +46,6 @@ namespace ConsoleSecondQuestion
             //await p.UpdateStudentAsync(p.GetStudentApi());
         }
 
-        public Student GetStudentApi() { return studentApi; }
 
         /// <summary>
         /// Search method but there is an API that help us to get any student Id
@@ -60,17 +58,18 @@ namespace ConsoleSecondQuestion
 
             var jsonString = await client.GetStringAsync(uri);
             List<Student> json = JsonConvert.DeserializeObject<List<Student>>(jsonString);
+            Student studentFromApi = null;
 
             foreach (var student in json)
             {
                 if (student.id == studentId)
                 {
-                    studentApi = student;
+                    studentFromApi = student;
                     break;
                 }
             }
 
-            return studentApi;
+            return studentFromApi;
         }
 
         public async Task<Student> GetStudentByName(string studentName)
@@ -129,20 +128,11 @@ namespace ConsoleSecondQuestion
             return studentJson;
         }
 
-        public Task<bool> IsFirstStudent(Student student)
+        public bool IsFirstStudent(Student student)
         {
-            return Task.Run(async () =>
-             {
-                 var result = false;
-                 await GetStudentAsync(student.id);
+            var studentFromApi = GetStudentAsync(1).Result;
 
-                 if (student.id == studentApi.id)
-                 {
-                     result = true;
-                 }
-
-                 return result;
-             });
+            return studentFromApi.Equals(student);
         }
     }
 }

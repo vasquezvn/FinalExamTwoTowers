@@ -58,7 +58,7 @@ namespace FinalExamTwoTowers
             s.programme = "Financial Analysis";
             s.courses = new string[] { "Accounting", "Statistics" };
 
-            var isFirst = p.IsFirstStudent(s).Result;
+            var isFirst = p.IsFirstStudent(s);
 
             Assert.IsTrue(isFirst, "Student is not the first student on API");
         }
